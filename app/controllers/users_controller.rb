@@ -1,18 +1,14 @@
 class UsersController < ApplicationController
-  expose(:user, attributes: :user_attributes)
+  before_action :authenticate_user!
+  before_action :get_user, only: [:show]
 
+  def show
 
-  def update
-    if user.save
-      redirect_to(user)
-    else
-      render :edit
-    end
   end
 
   private
 
-  def user_params
-    params.require(:user).permit(:age, :first_name, :last_name)
+  def get_user
+    @user = User.find(params[:id])
   end
 end

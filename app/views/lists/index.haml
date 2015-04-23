@@ -1,0 +1,15 @@
+%h1 Lists
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Owner
+  %tbody
+    - @lists.each do |list|
+      %tr
+        %td= list.name
+        %td= list.user.to_s if list.user
+        -#-if list.user_id == current_user.id
+        %td
+          = link_to 'Show', list_path(list), class: 'btn'

@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %title Geolist
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %p.notice= notice
+    %p.alert= alert
+    = yield
+    - if user_signed_in?
+      Logged in as
+      = succeed "." do
+        %strong= current_user.to_s
+      = link_to 'Edit profiles [Age name]', edit_profile_path(current_user), :class => 'navbar-link'
+      = link_to 'Show profiles', user_path(current_user)
+      =link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'
+    - else
+      = link_to "Sign up", new_user_registration_path, :class => 'navbar-link'
+      =link_to "Login", new_user_session_path, :class => 'navbar-link'

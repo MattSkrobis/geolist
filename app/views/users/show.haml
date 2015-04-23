@@ -1,0 +1,19 @@
+%h1= @user.to_s
+
+%b Age
+=@user.age
+%br
+
+-if @user.lists
+  %table.table.table-hover
+    %thead
+      %th Lists
+    %tbody
+      -@user.lists.each do |list|
+        %tr
+          %td= list.name
+%br
+
+= link_to 'New list', new_my_list_path
+= link_to 'Lists', lists_path
+%br

@@ -1,0 +1,20 @@
+%h1= @list.name
+
+-if @list.tasks
+  %table
+    %thead
+      %tr
+        %th Title
+    %tbody
+      - @list.tasks.each do |task|
+        %tr
+          %td= task.title
+
+%h2 Add a new task
+=semantic_form_for([@list, @task]) do |f|
+  =f.input :title
+  =f.input :start_at
+  =f.input :end_at
+  =f.input :description
+  =f.input :list_id #, as: :select, collection: List
+  =f.submit
