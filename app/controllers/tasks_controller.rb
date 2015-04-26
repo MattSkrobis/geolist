@@ -12,8 +12,9 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task.list_id = @list.id
     if @task.save
-      redirect_to list_path(@list)
+      redirect_to my_list_path(@list)
     else
       render :new
     end
@@ -21,13 +22,13 @@ class TasksController < ApplicationController
 
   def update
     if @task.update_attributes(task_params)
-      redirect_to list_path(@list)
+      redirect_to my_list_path(@list)
     end
   end
 
   def destroy
     @task.destroy
-    redirect_to list_path(@list)
+    redirect_to my_list_path(@list)
   end
 
   private

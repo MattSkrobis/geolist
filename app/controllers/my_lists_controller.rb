@@ -1,8 +1,8 @@
 class MyListsController < ApplicationController
-  before_action :get_list, only: [:edit, :show, :destroy, :update]
+  before_action :get_my_list, only: [:edit, :show, :destroy, :update]
 
   def update
-    if @list.update_attributes(list_params)
+    if @my_list.update_attributes(my_list_params)
       redirect_to my_lists_path
     else
       render :edit
@@ -10,8 +10,8 @@ class MyListsController < ApplicationController
   end
 
   def create
-    @list = current_user.lists.new(list_params)
-    if @list.save
+    @my_list = current_user.lists.new(my_list_params)
+    if @my_list.save
       redirect_to my_lists_path
     else
       render :new
@@ -19,7 +19,7 @@ class MyListsController < ApplicationController
   end
 
   def destroy
-    @list.destroy
+    @my_list.destroy
     redirect_to my_lists_path
   end
 
@@ -32,20 +32,20 @@ class MyListsController < ApplicationController
   end
 
   def index
-    @lists = List.all.where(user_id: current_user.id)
+    @my_lists = List.all.where(user_id: current_user.id)
   end
 
   def new
-    @list = List.new
+    @my_list = List.new
   end
 
   private
 
-  def list_params
+  def my_list_params
     params.require(:list).permit(:name, :user_id)
   end
 
-  def get_list
-    @list = current_user.lists.find(params[:id])
+  def get_my_list
+    @my_list = current_user.lists.find(params[:id])
   end
 end

@@ -1,20 +1,23 @@
-%h1= @list.name
+%h1= @my_list.name
+=link_to 'Change List name', edit_my_list_path(@my_list)
 
--if @list.tasks
+-if @my_list.tasks.count > 0
   %table
     %thead
       %tr
         %th Title
     %tbody
-      - @list.tasks.each do |task|
+      - @my_list.tasks.each do |task|
         %tr
           %td= task.title
+-else
+  %p Oh my! This list has no tasks. Add some using form below.
+%br
 
-%h2 Add a new task
-=semantic_form_for([@list, @task]) do |f|
-  =f.input :title
-  =f.input :start_at
-  =f.input :end_at
-  =f.input :description
-  =f.input :list_id #, as: :select, collection: List
-  =f.submit
+-#%h2 Add a new task
+-#=semantic_form_for [@my_list, @task] do |f|
+-#  =f.input :title
+-#  =f.input :start_at
+-#  =f.input :end_at
+-#  =f.input :description
+-#  =f.submit

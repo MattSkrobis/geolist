@@ -6,7 +6,9 @@
       %th Name
       %th Owner
   %tbody
-    - @lists.each do |list|
+    - @my_lists.each do |my_list|
       %tr
-        %td= list.name
-        %td= list.user.to_s if list.user
+        %td= my_list.name
+        %td= my_list.user.to_s if my_list.user
+        %td
+          = link_to 'Show', my_list_path(my_list), class: 'btn'
