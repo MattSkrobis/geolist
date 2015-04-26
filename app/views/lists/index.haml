@@ -6,7 +6,7 @@
       %th Name
       %th Owner
   %tbody
-    - @lists.each do |list|
+    - lists.each do |list|
       %tr
         %td= list.name
         %td= list.user.to_s if list.user

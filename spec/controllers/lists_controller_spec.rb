@@ -12,7 +12,7 @@ describe ListsController do
       before { call_request }
 
       it { should render_template 'show' }
-      it { expect(assigns(:list)).to eq list }
+      it { expect(controller.list).to eq list }
     end
   end
 
@@ -24,7 +24,7 @@ describe ListsController do
       before { call_request }
 
       it { should render_template 'index' }
-      it { expect(assigns(:lists)).to eq [list] }
+      it { expect(controller.lists).to eq [list] }
     end
   end
 end

@@ -1,12 +1,12 @@
-%h1= @list.name
+%h1= list.name
 
--if @list.tasks
+-if list.tasks
   %table
     %thead
       %tr
         %th Title
     %tbody
-      - @list.tasks.each do |task|
+      - list.tasks.each do |task|
         %tr
           %td= task.title
 
