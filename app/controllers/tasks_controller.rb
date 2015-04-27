@@ -33,8 +33,12 @@ class TasksController < ApplicationController
 
   private
 
+  def task_params
+    params.require(:task).permit(:title, :description, :start_at, :end_at)
+  end
+
   def get_list
-    @list = List.find(params[:list_id])
+    @list = List.find(params[:my_list_id])
   end
 
   def get_task

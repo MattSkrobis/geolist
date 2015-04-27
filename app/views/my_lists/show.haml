@@ -6,18 +6,24 @@
     %thead
       %tr
         %th Title
+        %th Start at
+        %th End at
+        %th Description
     %tbody
       - @my_list.tasks.each do |task|
         %tr
           %td= task.title
+          %td= task.start_at
+          %td= task.end_at
+          %td= task.description
 -else
   %p Oh my! This list has no tasks. Add some using form below.
 %br
 
--#%h2 Add a new task
--#=semantic_form_for [@my_list, @task] do |f|
--#  =f.input :title
--#  =f.input :start_at
--#  =f.input :end_at
--#  =f.input :description
--#  =f.submit
+%h2 Add a new task
+=semantic_form_for @task, url: my_list_tasks_path(@my_list), method: :post do |f|
+  =f.input :title
+  =f.input :start_at
+  =f.input :end_at
+  =f.input :description
+  =f.submit

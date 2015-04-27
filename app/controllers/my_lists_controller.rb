@@ -28,7 +28,7 @@ class MyListsController < ApplicationController
   end
 
   def show
-    @task = Task.new
+    @task = @my_list.tasks.new
   end
 
   def index

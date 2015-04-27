@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ProfilesController do
+describe ProfileController do
   render_views
   include_context 'user signed in'
 
@@ -12,7 +12,7 @@ describe ProfilesController do
       before { call_request }
 
       it { should render_template 'edit' }
-      it { expect(assigns(:profile)).to eq user }
+      it { expect(controller.profile).to eq user }
     end
   end
 
@@ -30,7 +30,7 @@ describe ProfilesController do
         before { call_request }
 
         it { should redirect_to user_path(user) }
-        it { expect(assigns(:profile)).to eq user }
+        it { expect(controller.profile).to eq user }
       end
     end
     context 'invalid request' do
