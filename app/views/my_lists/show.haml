@@ -13,8 +13,8 @@
       - @my_list.tasks.each do |task|
         %tr
           %td= task.title
-          %td= task.start_at
-          %td= task.end_at
+          -#%td= task.start_at
+          -#%td= task.end_at
           %td= task.description
 -else
   %p Oh my! This list has no tasks. Add some using form below.

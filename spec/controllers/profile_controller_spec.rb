@@ -29,7 +29,7 @@ describe ProfileController do
       context 'after request' do
         before { call_request }
 
-        it { should redirect_to user_path(user) }
+        it { should redirect_to profile_path }
         it { expect(controller.profile).to eq user }
       end
     end
@@ -38,6 +38,18 @@ describe ProfileController do
 
       it { expect { call_request }.not_to change { user.reload.first_name } }
       it { expect { call_request }.not_to change { user.reload.last_name } }
+    end
+  end
+
+  describe '#show' do
+    let(:call_request) { get :show, id: user.id }
+    let(:user) { create(:user) }
+
+    context 'after request' do
+      before { call_request }
+
+      it { should render_template 'show' }
+      it { expect(controller.profile).to eq user }
     end
   end
 end
