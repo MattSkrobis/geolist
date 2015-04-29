@@ -2,7 +2,7 @@
 =link_to 'Change List name', edit_my_list_path(@my_list)
 
 -if @my_list.tasks.count > 0
-  %table
+  %table.table.table-hover
     %thead
       %tr
         %th Title
@@ -10,20 +10,19 @@
         %th End at
         %th Description
     %tbody
-      - @my_list.tasks.each do |task|
+      - @my_list.tasks.created.each do |task|
         %tr
           %td= task.title
-          -#%td= task.start_at
-          -#%td= task.end_at
+          %td= task.start_at.strftime('%d/%m%Y %H:%M') if task.start_at
+          %td= task.end_at.strftime('%d/%m/%Y %H:%M') if task.end_at
           %td= task.description
+          %td
+            =link_to 'Edit task', edit_my_list_task_path(@my_list, task), class: 'btn'
+            =link_to 'Destroy task', my_list_task_path(@my_list, task), method: :delete, data: {confirm: 'Are you certain?'}, class: 'btn'
 -else
   %p Oh my! This list has no tasks. Add some using form below.
 %br
 
 %h2 Add a new task
 =semantic_form_for @task, url: my_list_tasks_path(@my_list), method: :post do |f|
-  =f.input :title
-  =f.input :start_at
-  =f.input :end_at
-  =f.input :description
-  =f.submit
+  = render partial: 'tasks/form', locals: {f:f}

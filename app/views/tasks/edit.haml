@@ -1,1 +1,2 @@
-= render 'tasks/form'
+=semantic_form_for [@my_list, @task], url: my_list_task_path(@my_list,@task), method: :put do |f|
+  = render partial: 'tasks/form', locals: {f:f}

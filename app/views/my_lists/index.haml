@@ -12,3 +12,4 @@
         %td= my_list.user.to_s if my_list.user
         %td
           = link_to 'Show', my_list_path(my_list), class: 'btn'
+          = link_to 'Destroy', my_list_path(my_list), method: :delete, data: {confirm:'Are you certain?'}, class: 'btn'
