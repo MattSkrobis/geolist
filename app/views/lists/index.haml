@@ -1,15 +1,26 @@
 %h1 Lists
 
+=search_form_for @q do |f|
+  =f.label :user_first_name_or_user_last_name_cont
+  =f.search_field :user_first_name_or_user_last_name_cont
+  =f.submit
+
+=search_form_for @q do |f|
+  =f.label :title_cont
+  =f.search_field :name_cont
+  =f.submit
+
+=link_to 'All lists', lists_path
+
 %table.table.table-hover
   %thead
     %tr
-      %th Name
+      %th Title
       %th Owner
   %tbody
-    - lists.each do |list|
+    - @lists.each do |list|
       %tr
         %td= list.name
         %td= list.user.to_s if list.user
-        -#-if list.user_id == current_user.id
         %td
           = link_to 'Show', list_path(list), class: 'btn'

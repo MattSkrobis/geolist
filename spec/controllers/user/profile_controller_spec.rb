@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ProfileController do
+describe User::ProfileController do
   render_views
   include_context 'user signed in'
 
@@ -29,7 +29,7 @@ describe ProfileController do
       context 'after request' do
         before { call_request }
 
-        it { should redirect_to profile_path }
+        it { should redirect_to user_profile_path }
         it { expect(controller.profile).to eq user }
       end
     end

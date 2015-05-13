@@ -1,11 +1,25 @@
 %h1= list.name
 
--if list.tasks
-  %table
+- if flash[:error]
+  %p.error= h flash[:error]
+
+-if list.tasks.count > 0
+  %table.table.hover
     %thead
       %tr
         %th Title
+        %th Description
+        %th Start at
+        %th End at
     %tbody
-      - list.tasks.each do |task|
+      - list.tasks.created.not_assigned.each do |task|
         %tr
           %td= task.title
+          %td= task.description
+          %td= task.start_at.strftime('%d-%m-%y %H:%M') if task.start_at
+          %td= task.end_at.strftime('%d-%m-%y %H:%M') if task.end_at
+          %td
+            - if !task.assigned
+              = link_to 'Assign this task', list_task_path(list, task, task: {assigned: true, assignee_id: current_user.id} ), method: :patch
+- else
+  %p This list has no tasks! OH NOES!

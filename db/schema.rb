@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417100858) do
+ActiveRecord::Schema.define(version: 20150513171050) do
 
   create_table "lists", force: true do |t|
     t.string  "name"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20150417100858) do
     t.datetime "end_at"
     t.string   "description"
     t.integer  "list_id"
+    t.integer  "assignee_id"
+    t.boolean  "assigned",    default: false
   end
 
   create_table "users", force: true do |t|

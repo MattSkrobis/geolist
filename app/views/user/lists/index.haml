@@ -1,0 +1,15 @@
+%h1 Lists
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Owner
+  %tbody
+    - lists.each do |list|
+      %tr
+        %td= list.name
+        %td= list.user.to_s if list.user
+        %td
+          = link_to 'Show', user_list_path(list), class: 'btn'
+          = link_to 'Destroy', user_list_path(list), method: :delete, data: {confirm:'Are you certain?'}, class: 'btn'

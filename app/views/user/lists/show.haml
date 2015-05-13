@@ -1,0 +1,31 @@
+%h1= list.name
+=link_to 'Change List name', edit_user_list_path(list)
+
+-if list.tasks.count > 0
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Title
+        %th Start at
+        %th End at
+        %th Description
+    %tbody
+      - list.tasks.created.each do |task|
+        %tr
+          %td= task.title
+          %td= task.start_at.strftime('%d/%m/%Y %H:%M') if task.start_at
+          %td= task.end_at.strftime('%d/%m/%Y %H:%M') if task.end_at
+          %td= task.description
+          %td
+            =link_to 'Edit task', edit_user_list_task_path(list, task), class: 'btn'
+            =link_to 'Destroy task', user_list_task_path(list, task), method: :delete, data: {confirm: 'Are you certain?'}, class: 'btn'
+-else
+  %p Oh my! This list has no tasks. Add some using form below.
+%br
+
+- if flash[:error]
+  %p.error= h flash[:error]
+
+%h2 Add a new task
+=semantic_form_for [:user, task], url: user_list_tasks_path(list), method: :post do |f|
+  = render partial: 'tasks/form', locals: {f:f}

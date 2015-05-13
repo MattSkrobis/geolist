@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ListsController do
+describe ::ListsController do
   render_views
   include_context 'user signed in'
 
@@ -24,7 +24,7 @@ describe ListsController do
       before { call_request }
 
       it { should render_template 'index' }
-      it { expect(controller.lists).to eq [list] }
+      it { expect(assigns(:lists)).to eq [list] }
     end
   end
 end

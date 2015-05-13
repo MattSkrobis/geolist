@@ -1,72 +1,72 @@
 require 'rails_helper'
 
-describe MyListsController do
+describe User::ListsController do
   render_views
   include_context 'user signed in'
 
   describe '#new' do
-    let(:call_request) { get :new, user_id: user.id }
+    let(:call_request) { get :new }
 
     context 'after request' do
       before { call_request }
 
-      it { expect(assigns(:my_list).persisted?).to be false }
+      it { expect((controller.list).persisted?).to be false }
       it { should render_template 'new' }
     end
   end
 
   describe '#index' do
-    let(:call_request) { get :index, user_id: user.id }
+    let(:call_request) { get :index }
     let!(:list) { create(:list, user: user) }
 
     context 'after request' do
       before { call_request }
 
       it { should render_template 'index' }
-      it { expect(assigns(:my_lists)).to eq [list] }
+      it { expect(controller.lists).to eq [list] }
     end
   end
 
   describe "#edit" do
-    let(:call_request) { get :edit, id: list.id, user_id: user.id }
-    let(:list) { create(:list, user: user) }
+    let(:call_request) { get :edit, id: list.id }
+    let!(:list) { create(:list, user: user) }
 
     context 'after request' do
-      before { call_request }
+      before {call_request }
 
       it { should render_template 'edit' }
-      it { expect(assigns(:my_list)).to eq list }
+      it { expect(controller.list).to eq list }
     end
   end
 
   describe "#show" do
-    let(:call_request) { get :show, id: list.id, user_id: user.id }
+    let(:call_request) { get :show, id: list.id }
     let(:list) { create(:list, user: user) }
 
     context 'after request' do
       before { call_request }
 
       it { should render_template 'show' }
-      it { expect(assigns(:my_list)).to eq list }
+      it { expect(controller.list).to eq list }
     end
   end
 
   describe "#destroy" do
     let!(:list) { create(:list, user: user) }
-    let(:call_request) { delete :destroy, id: list.id, user_id: user.id }
+    let(:call_request) { delete :destroy, id: list.id }
 
     it { expect { call_request }.to change { List.count }.by(-1) }
 
     context 'after request' do
       before { call_request }
 
-      it { should redirect_to my_lists_path }
+      it { should redirect_to user_lists_path }
     end
   end
 
   describe "#update" do
     let!(:list) { create(:list, name: "MyList", user: user) }
-    let(:call_request) { put :update, id: list.id, user_id: user.id, list: attributes }
+    let(:call_request) { put :update, id: list.id, list: attributes }
 
     context 'valid request' do
       let(:attributes) { attributes_for(:list, name: "YourList") }
@@ -76,8 +76,8 @@ describe MyListsController do
       context 'after request' do
         before { call_request }
 
-        it { should redirect_to my_lists_path }
-        it { expect(assigns(:my_list)).to eq list }
+        it { should redirect_to user_lists_path }
+        it { expect(controller.list).to eq list }
       end
     end
 
@@ -90,13 +90,13 @@ describe MyListsController do
         before { call_request }
 
         it { should render_template 'edit' }
-        it { expect(assigns(:my_list)).to eq list }
+        it { expect(controller.list).to eq list }
       end
     end
   end
 
   describe "#create" do
-    let(:call_request) { post :create, list: attributes, user_id: user.id }
+    let(:call_request) { post :create, list: attributes }
 
     context 'valid request' do
       let(:attributes) { attributes_for(:list, name: 'List') }
@@ -105,9 +105,8 @@ describe MyListsController do
 
       context 'after request' do
         before { call_request }
-        # let(:created_list) { List.last }
 
-        it { should redirect_to my_lists_path }
+        it { should redirect_to user_lists_path }
       end
     end
 

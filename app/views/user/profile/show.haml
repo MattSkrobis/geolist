@@ -1,0 +1,47 @@
+%h1= profile.to_s
+
+%div
+  =link_to 'Edit profile', edit_user_profile_path
+%br
+
+%b Age
+= profile.age
+%br
+- if profile.lists.count > 0
+  %table.table.table-hover
+    %thead
+      %th Lists
+    %tbody
+      - profile.lists.each do |list|
+        %tr
+          %td= list.name
+          %td
+            = link_to 'Show list', user_list_path(list)
+            = link_to 'Change Name', edit_user_list_path(list)
+%br
+
+= link_to 'New list', new_user_list_path
+= link_to 'Lists', lists_path
+
+%h2
+  Tasks assigned to you
+- if profile.assigned_tasks.count > 0
+  %table.table.table-hover
+    %thead
+      %th Title
+      %th List name
+      %th Description
+      %th Start at
+      %th End at
+    %tbody
+      - profile.assigned_tasks.each do |task|
+        %td= task.title
+        %td= task.list.name
+        %td= task.description
+        %td= task.start_at.strftime('%d-%m-%y %H:%M') if task.start_at
+        %td= task.end_at.strftime('%d-%m-%y %H:%M') if task.end_at
+        %td
+          = link_to 'Unassign this task', list_task_path( task, list_id: task.list_id ,task: {assigned: false, assignee_id: nil} ), method: :patch
+- else
+  %p You don't have assigned tasks yet.
+%br
