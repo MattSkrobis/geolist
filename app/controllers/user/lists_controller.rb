@@ -1,5 +1,5 @@
 class User::ListsController < User::UserController
-  expose(:lists) { List.all.where(user_id: current_user.id) }
+  expose(:lists) { List.all.where(owner_id: current_user.id) }
   expose(:list, model: :list)
   expose(:task) { list.tasks.new }
 
@@ -28,6 +28,6 @@ class User::ListsController < User::UserController
   private
 
   def list_params
-    params.require(:list).permit(:name, :user_id)
+    params.require(:list).permit(:name, :owner_id)
   end
 end

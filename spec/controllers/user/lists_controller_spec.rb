@@ -17,7 +17,7 @@ describe User::ListsController do
 
   describe '#index' do
     let(:call_request) { get :index }
-    let!(:list) { create(:list, user: user) }
+    let!(:list) { create(:list, owner_id: user.id) }
 
     context 'after request' do
       before { call_request }
@@ -29,7 +29,7 @@ describe User::ListsController do
 
   describe "#edit" do
     let(:call_request) { get :edit, id: list.id }
-    let!(:list) { create(:list, user: user) }
+    let!(:list) { create(:list, owner_id: user.id) }
 
     context 'after request' do
       before {call_request }
@@ -41,7 +41,7 @@ describe User::ListsController do
 
   describe "#show" do
     let(:call_request) { get :show, id: list.id }
-    let(:list) { create(:list, user: user) }
+    let(:list) { create(:list, owner_id: user.id) }
 
     context 'after request' do
       before { call_request }
@@ -52,7 +52,7 @@ describe User::ListsController do
   end
 
   describe "#destroy" do
-    let!(:list) { create(:list, user: user) }
+    let!(:list) { create(:list, owner_id: user.id) }
     let(:call_request) { delete :destroy, id: list.id }
 
     it { expect { call_request }.to change { List.count }.by(-1) }
@@ -65,7 +65,7 @@ describe User::ListsController do
   end
 
   describe "#update" do
-    let!(:list) { create(:list, name: "MyList", user: user) }
+    let!(:list) { create(:list, name: "MyList", owner_id: user.id) }
     let(:call_request) { put :update, id: list.id, list: attributes }
 
     context 'valid request' do

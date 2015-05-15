@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515154620) do
+ActiveRecord::Schema.define(version: 20150515161934) do
 
   create_table "lists", force: true do |t|
     t.string  "name"
-    t.integer "user_id"
+    t.integer "owner_id"
   end
 
   create_table "locations", force: true do |t|

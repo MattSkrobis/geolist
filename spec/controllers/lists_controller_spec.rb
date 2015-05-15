@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe ::ListsController do
+describe ListsController do
   render_views
   include_context 'user signed in'
 
   describe "#show" do
-    let(:call_request) { get :show, id: list.id, user_id: user.id }
-    let(:list) { create(:list, user: user) }
+    let(:call_request) { get :show, id: list.id, owner_id: user.id }
+    let(:list) { create(:list, owner_id: user.id) }
 
     context 'after request' do
       before { call_request }
@@ -17,8 +17,8 @@ describe ::ListsController do
   end
 
   describe '#index' do
-    let(:call_request) { get :index, user_id: user.id }
-    let!(:list) { create(:list, user: user) }
+    let(:call_request) { get :index, owner_id: user.id }
+    let!(:list) { create(:list, owner_id: user.id) }
 
     context 'after request' do
       before { call_request }

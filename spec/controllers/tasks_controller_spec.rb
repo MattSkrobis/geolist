@@ -17,7 +17,7 @@ describe TasksController do
       context 'after request' do
         before { call_request }
 
-        it { should redirect_to list_path(list) }
+        it { should redirect_to user_profile_path }
         it { expect(controller.task).to eq task }
       end
     end
@@ -30,7 +30,6 @@ describe TasksController do
       context 'after request' do
         before { call_request }
 
-        it { should render_template 'edit' }
         it { expect(controller.task).to eq task }
       end
     end
