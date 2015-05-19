@@ -36,6 +36,8 @@ gem 'decent_exposure'
 gem "paperclip", "~> 4.2"
 gem "twitter-bootstrap-rails"
 gem "formtastic-bootstrap", "~> 3.1.0"
+gem 'leaflet-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

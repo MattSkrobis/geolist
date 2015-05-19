@@ -1,0 +1,24 @@
+%h1 Task
+
+%b Title
+= task.title
+%br
+
+%b Description
+= task.description
+%br
+
+%b Start at
+= task.start_at.strftime('%d/%m/%Y %H:%M') if task.start_at
+%br
+
+%b End at
+= task.end_at.strftime('%d/%m/%Y %H:%M') if task.end_at
+%br
+
+%div{id: 'map'}
+  = map(center: {latlng: [51.52238797921441, -0.08366235665359283], zoom: 18},
+  :markers => [{:latlng => [51.52238797921441, -0.08366235665359283],
+  :popup => "Hello!"}])
+
+= javascript_include_tag 'application', 'data-turbolinks-track' => true

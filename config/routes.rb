@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   namespace :user do
     resource :profile, only: [:show, :update, :edit], controller: 'profile'
     resources :lists do
-      resources :tasks, except: [:index, :show]
+      resources :tasks, except: [:index]
     end
   end
 end
