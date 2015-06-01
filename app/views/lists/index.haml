@@ -21,6 +21,6 @@
     - @lists.each do |list|
       %tr
         %td= list.name
-        %td= list.user.to_s if list.user
+        %td= list.owner if list.owner_id.present?
         %td
-          = link_to 'Show', list_path(list), class: 'btn'
+          = link_to 'Show', list_path(list), class: 'btn btn-default'

@@ -16,9 +16,18 @@
 = task.end_at.strftime('%d/%m/%Y %H:%M') if task.end_at
 %br
 
-%div{id: 'map'}
-  = map(center: {latlng: [51.52238797921441, -0.08366235665359283], zoom: 18},
-  :markers => [{:latlng => [51.52238797921441, -0.08366235665359283],
-  :popup => "Hello!"}])
+%b Latitude
+= task.latitude
+%br
+
+%b Longitude
+= task.longitude
+%br
+
+%div{id: 'map', class: 'centered'}
+  = map(center: {latlng: [task.latitude, task.longitude], zoom: 15},
+  :markers => [{:latlng => [task.latitude, task.longitude],
+  :popup => task.title}])
+%br
 
 = javascript_include_tag 'application', 'data-turbolinks-track' => true

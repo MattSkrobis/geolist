@@ -33,6 +33,6 @@ class User::TasksController < User::UserController
   private
 
   def task_params
-    params.require(:task).permit(:start_at, :end_at, :title, :description)
+    params.require(:task).permit(:start_at, :end_at, :title, :description, :latitude, :longitude)
   end
 end

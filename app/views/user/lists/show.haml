@@ -1,5 +1,5 @@
 %h1= list.name
-=link_to 'Change List name', edit_user_list_path(list)
+=link_to 'Change List name', edit_user_list_path(list), class: 'btn btn-default'
 
 -if list.tasks.count > 0
   %table.table.table-hover
@@ -17,9 +17,9 @@
           %td= task.end_at.strftime('%d/%m/%Y %H:%M') if task.end_at
           %td= task.description
           %td
-            =link_to 'Show task', user_list_task_path(list, task), class: 'btn'
-            =link_to 'Edit task', edit_user_list_task_path(list, task), class: 'btn'
-            =link_to 'Destroy task', user_list_task_path(list, task), method: :delete, data: {confirm: 'Are you certain?'}, class: 'btn'
+            =link_to 'Show task', user_list_task_path(list, task), class: 'btn btn-default'
+            =link_to 'Edit task', edit_user_list_task_path(list, task), class: 'btn btn-default'
+            =link_to 'Destroy task', user_list_task_path(list, task), method: :delete, data: {confirm: 'Are you certain?'}, class: 'btn btn-danger'
 -else
   %p Oh my! This list has no tasks. Add some using form below.
 %br

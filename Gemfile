@@ -67,4 +67,6 @@ group :test do
   gem 'simplecov', require: false
 end
 
+gem 'pg'
+gem 'activerecord-postgis-adapter'
 gem 'faker', group: [:development, :test]

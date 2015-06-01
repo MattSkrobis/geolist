@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :task do
     sequence(:title) { |n| "List_#{n}" }
-    list_id { create(:list).id }
+    list { create(:list) }
   end
 end

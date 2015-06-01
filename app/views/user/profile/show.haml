@@ -1,44 +1,57 @@
 %h1= profile.to_s
 
 %div
-  =link_to 'Edit profile', edit_user_profile_path
-%br
+  =link_to 'Edit profile', edit_user_profile_path, class: 'btn btn-default'
 %br
 - if profile.lists.count > 0
+  %h2 Lists
   %table.table.table-hover
     %thead
-      %th Lists
+      %th Name
+      %th Actions
     %tbody
       - profile.lists.each do |list|
         %tr
           %td= list.name
           %td
-            = link_to 'Show list', user_list_path(list)
-            = link_to 'Change Name', edit_user_list_path(list)
+            = link_to 'Show list', user_list_path(list), class: 'btn btn-default'
+            = link_to 'Change Name', edit_user_list_path(list), class: 'btn btn-default'
 %br
 
-= link_to 'New list', new_user_list_path
-= link_to 'Lists', lists_path
+= link_to 'New list', new_user_list_path, class: 'btn btn-default'
+= link_to 'Lists', lists_path, class: 'btn btn-default'
 
 %h2
   Tasks assigned to you
 - if profile.assigned_tasks.count > 0
+
+  %div{id: 'map', class: 'centered'}
+    [{:latlng => [task.latitude, task.longitude], :popup => task.title}]
+    = map(center: {latlng: [profile.latitude, profile.longitude], zoom: 16},
+    :markers => exp_tasks)
+  %br
+
   %table.table.table-hover
     %thead
-      %th Title
-      %th List name
-      %th Description
-      %th Start at
-      %th End at
+      %tr
+        %th Title
+        %th List name
+        %th Description
+        %th Start at
+        %th End at
+        %th
     %tbody
       - profile.assigned_tasks.each do |task|
-        %td= task.title
-        %td= task.list.name
-        %td= task.description
-        %td= task.start_at.strftime('%d-%m-%y %H:%M') if task.start_at
-        %td= task.end_at.strftime('%d-%m-%y %H:%M') if task.end_at
-        %td
-          = link_to 'Unassign this task', list_task_path( task, list_id: task.list_id ,task: {assigned: false, assignee_id: nil} ), method: :patch
+        %tr
+          %td= task.title
+          %td= task.list.name
+          %td= task.description
+          %td= task.start_at.strftime('%d-%m-%y %H:%M') if task.start_at
+          %td= task.end_at.strftime('%d-%m-%y %H:%M') if task.end_at
+          %td
+            = link_to 'Unassign this task', list_task_path( task, list_id: task.list_id ,task: {assigned: false, assignee_id: nil} ), method: :patch, class: 'btn btn-default'
 - else
   %p You don't have assigned tasks yet.
 %br
+
+= javascript_include_tag 'application', 'data-turbolinks-track' => true

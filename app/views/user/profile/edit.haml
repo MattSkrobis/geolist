@@ -2,9 +2,11 @@
 = semantic_form_for [:user, profile], url: user_profile_path, method: :patch do |f|
   =f.input :first_name
   =f.input :last_name
+  =f.input :longitude
+  =f.input :latitude
   =f.submit
 %br
 %div
-  = link_to "Change your password", edit_user_registration_path
+  = link_to 'Change your password', edit_user_registration_path, class: 'btn btn-default'
 %br
-  =link_to 'Back', user_profile_path
+  =link_to 'Back', user_profile_path, class: 'btn btn-default'

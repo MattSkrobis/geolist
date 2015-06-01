@@ -33,6 +33,9 @@ GEM
       activemodel (= 4.1.8)
       activesupport (= 4.1.8)
       arel (~> 5.0.0)
+    activerecord-postgis-adapter (2.2.2)
+      activerecord (>= 4.0.0, < 4.2.0)
+      rgeo-activerecord (~> 1.2)
     activesupport (4.1.8)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -120,6 +123,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    pg (0.18.2)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
     pry (0.10.1)
@@ -149,6 +153,10 @@ GEM
       json (~> 1.4)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    rgeo (0.3.20)
+    rgeo-activerecord (1.2.0)
+      activerecord (~> 4.0)
+      rgeo (~> 0.3)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -221,6 +229,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-postgis-adapter
   better_errors
   binding_of_caller
   coffee-rails (~> 4.0.0)
@@ -239,6 +248,7 @@ DEPENDENCIES
   leaflet-rails
   letter_opener
   paperclip (~> 4.2)
+  pg
   pry
   rails (= 4.1.8)
   ransack!
